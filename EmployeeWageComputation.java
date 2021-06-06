@@ -10,6 +10,19 @@
 package com.bridgelabz.Employeewage;
 
 class EmployeeWageComputation {
+	
+	//  variables
+	private static final int IS_FULL_TIME = 1;
+	private static final int WAGE_RATE_PER_HOUR = 20;
+	
+/**
+ *  uc2- calculating daily wage for full time employee
+ */	
+
+	private void employeeDailyWage( int workRatePerHour ) {
+		 int employeeDailyWage = wageRatePerHour * workRatePerHour;
+		 System.out.println("Employee Daily wage is : " +employeeDailyWage +"$");
+	}
 
    
  /**
@@ -22,14 +35,16 @@ class EmployeeWageComputation {
        System.out.println("Welcome to Employee Wage Computation Program");
 	   
 /**
- *  uc1- checking whether a employee is present or absent 
- */	
+ *  uc1- checking  if full time employee is present or absent
+ * passing work rate per hour value to employee wage calculation by creating object.
+ */		
+		Employee employee = new Employee();
 		int attendanceCheck = (int)(Math.random()*2);
-	     if (attendanceCheck == 0){
-		System.out.println("Employee is Absent");
-		 }
+	     if (attendanceCheck == isFullTime){
+		employee.employeeDailyWage(8);
+		}
 		else{
-		System.out.println("Employee is Present");
+		employee.employeeDailyWage(0);
 		}
 
     }
