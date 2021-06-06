@@ -20,6 +20,17 @@ class EmployeeWageComputation {
 	public static void main(String[] args) {
 
        System.out.println("Welcome to Employee Wage Computation Program");
+	   
+/**
+ *  uc1- checking whether a employee is present or absent 
+ */	
+		int attendanceCheck = (int)(Math.random()*2);
+	     if (attendanceCheck == 0){
+		System.out.println("Employee is Absent");
+		 }
+		else{
+		System.out.println("Employee is Present");
+		}
 
     }
 }
