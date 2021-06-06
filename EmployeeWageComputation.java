@@ -13,10 +13,11 @@ class EmployeeWageComputation {
 	
 	//  variables
 	private static final int IS_FULL_TIME = 1;
+	private static final int IS_PART_TIME = 2;
 	private static final int WAGE_RATE_PER_HOUR = 20;
 	
 /**
- *  uc2- calculating daily wage for full time employee
+ *  uc2- calculating daily wage for full time and part time employee
  */	
 
 	private void employeeDailyWage( int workRatePerHour ) {
@@ -36,16 +37,20 @@ class EmployeeWageComputation {
 	   
 /**
  *  uc1- checking  if full time employee is present or absent
- * passing work rate per hour value to employee wage calculation by creating object.
+ *  passing work rate per hour value to employee wage calculation by creating object.
+ *  uc3- added part time employee for calculating daily wage
  */		
 		Employee employee = new Employee();
-		int attendanceCheck = (int)(Math.random()*2);
-	     if (attendanceCheck == isFullTime){
-		employee.employeeDailyWage(8);
+		int attendanceCheck = (int)(Math.random()*3);
+	    if (attendanceCheck == IS_FULL_TIME){
+			employee.employeeDailyWage(8);
 		}
-		else{
-		employee.employeeDailyWage(0);
+		else if (attendanceCheck == IS_PART_TIME){
+			employee.employeeDailyWage(4);
 		}
+		else {
+			employee.employeeDailyWage(0);
+		     }
 
     }
 }
