@@ -39,18 +39,21 @@ class EmployeeWageComputation {
  *  uc1- checking  if full time employee is present or absent
  *  passing work rate per hour value to employee wage calculation by creating object.
  *  uc3- added part time employee for calculating daily wage
+ *  UC4- calculating daily wage using switch case	
  */		
-		Employee employee = new Employee();
-		int attendanceCheck = (int)(Math.random()*3);
-	    if (attendanceCheck == IS_FULL_TIME){
+			Employee employee = new Employee();
+		    int attendanceCheck = (int)(Math.random()*3);
+	        switch (attendanceCheck){
+			case IS_FULL_TIME:
 			employee.employeeDailyWage(8);
-		}
-		else if (attendanceCheck == IS_PART_TIME){
+			break;
+
+			case IS_PART_TIME:
 			employee.employeeDailyWage(4);
-		}
-		else {
+			break;
+
+			default:
 			employee.employeeDailyWage(0);
 		     }
-
     }
 }
