@@ -1,1 +1,2 @@
 # EmployeeWageProblem
+It is a simple java program To calculate Employee Daily wage and monthly wage. A random varible has been 1 or 2 has been generated for checking Employee is part time or full time employee. A daily wage for 20 days has been calculated and total salary total working hours has also been calculated
