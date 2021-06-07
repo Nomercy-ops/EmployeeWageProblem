@@ -4,32 +4,36 @@
  * @version 1.0
  * @Created_on: 06.06.21
  *
- * purpose: is to calculate employee Working hours and monthly wages.
+ * purpose: is to calculate employee daily and monthly wages.
  *
  */
- 
 package com.bridgelabz.Employeewage;
 
-class EmployeeWageComputation {
-
-    private static final int PART_TIME = 1;
-    private static final int FULL_TIME = 2;
-    private static final int WAGE_RATE_PER_HOUR = 20;
-    private static final int NUMBER_OF_WORKING_DAYS = 20;
-    private static final int TOTAL_WORKING_HOURS = 100;
+public class EmployeeWageComputation {
 
     /**
-     *  calculating Total wage  and  daily working hours for full time and part time employee
-     * while loop is used to calculate employee wage if a certain condition is met
+     * calculateTotalWage method gets value from main method and calculate the
+     * employee wage
+     *
+     * @param company
+     * @param wageRatePerHour
+     * @param maxWorkingDays
+     * @param maxWorkingHours
+     *
      */
-    public static int calculateTotalWage() {
+    private static void calculateTotalWage(String companyName, int wageRatePerHour, int maxWorkingDays, int maxWorkingHours) {
+        //constant variable
+        final int PART_TIME = 1;
+        final int FULL_TIME = 2;
 
-        //variables
-        int workingHours = 0, totalWorkingHours = 0, totalWorkingDays = 0;
+        // instance variable
+        int totalWage = 0;
+        int workingHours = 0;
+        int totalWorkingHours = 0;
 
-        //computation done here
-        while (totalWorkingHours <= TOTAL_WORKING_HOURS && totalWorkingDays < NUMBER_OF_WORKING_DAYS) {
-            totalWorkingDays++;
+        // for loop checking 
+        for (int day = 1; day <= maxWorkingDays && totalWorkingHours <= maxWorkingHours; day++) {
+            totalWorkingHours += workingHours;
             int employeeType = (int) (Math.random() * 100) % 3;
             switch (employeeType) {
                 case FULL_TIME:
@@ -40,27 +44,27 @@ class EmployeeWageComputation {
                     break;
                 default:
                     workingHours = 0;
-                    break;
             }
-            totalWorkingHours += workingHours;
-            System.out.println("Day#: " + totalWorkingDays + " Working Hours: " + workingHours);
-        }
-        
-        // printing  total employee wage after while ends. 
-        int totalEmployeeWage = totalWorkingHours * WAGE_RATE_PER_HOUR;
-        System.out.println("Total Employee Wage is : " + totalEmployeeWage);
-        return totalEmployeeWage;
+            int Employeewage = workingHours * wageRatePerHour;
+            totalWage += Employeewage;
 
+            System.out.println("Day#: " + day + " Working Hours: " + workingHours);
+        } //end of for loop
+
+        System.out.println("Total wage for a month of " + companyName + " employee is " + totalWage + "\n");
     }
 
     /**
      *
      * This is the main method Displaying Welcome to Employee Wage Computation
-     * Program calling employee Monthly Wage method for calculating wages
+     * passing company name wage rate per hour into calculate total wage method
+     * for employee wage
      *
+     * @param args
      */
     public static void main(String args[]) {
-        System.out.println("Welcome to Employee Wage Computation Program");
-        calculateTotalWage();// calling this method to start calculation of employee wage
+        calculateTotalWage("Amazon", 40, 15, 200);
+        calculateTotalWage("BigBazar", 20, 20, 100);
+        calculateTotalWage("Dmart", 10, 15, 200);
     }
 }
