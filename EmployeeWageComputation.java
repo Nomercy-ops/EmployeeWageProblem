@@ -22,7 +22,9 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
     public static final int PART_TIME = 1;
     public static final int FULL_TIME = 2;
 
-    //for storing employee data..  
+    //references of company employee wage objects are stored in arraylist 
+    //companyname is mapped with total employee wage
+    
     ArrayList<CompanyEmployeeWage> companies;
     HashMap<String, Integer> totalEmployeeWages;
 
@@ -30,21 +32,21 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
      * constructor for adding companies from main method to companies arraylist
      * putting companies into arraylist.
      */
+    
     public EmployeeWageComputation() {
         companies = new ArrayList<>();
         totalEmployeeWages = new HashMap<>();
     }
 
     /**
-     * Method for adding new company and values into arraylist. It is getting
-     * value from the main method. Here hashmap is also used to store each
-     * company name
+     * it creates company employee wage objects and add to the arraylist
      *
      * @param companyName
      * @param wageRatePerHour
      * @param numberOfWorkingDays
      * @param maxHoursPerMonth
      */
+    
     @Override
     public void addCompany(String companyName, int wageRatePerHour, int numberOfWorkingDays, int maxHoursPerMonth) {
         CompanyEmployeeWage company = new CompanyEmployeeWage(companyName, wageRatePerHour, numberOfWorkingDays, maxHoursPerMonth);
@@ -129,6 +131,16 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
             System.out.println(companyName + ": " + totalEmployeeWages.get(companyName));
         }
     }
+    
+    /**
+     *  method for getting total employee wages with company name.
+     * @param companyName
+     * @return 
+     */
+     @Override
+    public int getWageByCompanyName(String companyName) {
+       return totalEmployeeWages.get(companyName);
+    }
 
     /**
      *
@@ -144,8 +156,13 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
         employeeWageComputation.addCompany("Google", 5, 40, 170);
         employeeWageComputation.addCompany("Amazon", 19, 10, 150);
         employeeWageComputation.calculateCompanyWage();
-        employeeWageComputation.printTotalEmployeeWages();
-
+        String query = "Google";
+        int totalWage = employeeWageComputation.getWageByCompanyName(query);
+        System.out.println("Total Employee Wage for " + query + " company is " + totalWage);
     }
+
+   
+
+   
 
 } // end of class
