@@ -7,10 +7,14 @@
  * purpose: is to calculate employee daily and monthly wages for the Multiple companies.
  *
  */
+ package com.bridgelabz.Employeewage;
  
- //package com.bridgelabz.Employeewage;
+
+ /**
+  *  EmployeeWageComputation class  starts here
+  */
  
- public class EmployeeWageComputation
+ public class EmployeeWageComputation implements IEmployeeWageComputation
  {
  
  // class constants
@@ -18,7 +22,7 @@
     public static final int FULL_TIME = 2;
 	
 	// variables
-	public int noOfCompanies;
+    public int noOfCompanies;
     public int	index=0;
     CompanyEmployeeWage[] companies;
 	
@@ -33,8 +37,13 @@
 /**
   * Method  for adding new company and values  into array.
   *  It is getting value from the main method.
+     * @param companyName
+     * @param wageRatePerHour
+     * @param numberOfWorkingDays
+     * @param maxHoursPerMonth
   */
 
+    @Override
     public void addCompany(String companyName, int wageRatePerHour, int numberOfWorkingDays, int maxHoursPerMonth)
     {
         companies[index++] = new CompanyEmployeeWage(companyName, wageRatePerHour, numberOfWorkingDays, maxHoursPerMonth);
@@ -42,7 +51,8 @@
 	
 
 /**
-  * Method  for generating random number either 0 or 1 or 2.
+  * Method  for generating random number.
+     * @return either 0 or 1 or 2.
   */
 
    public int generateEmployeeType()
@@ -76,6 +86,7 @@
   * Here calculation for each companies will be done by passing its value to  calculateTotalWage.
   */
 
+    @Override
 	public void calculateCompanyWage()
     {
         for (CompanyEmployeeWage company : companies)
@@ -88,11 +99,9 @@
    
  /**
      * calculate TotalWage method gets value from main method and calculate the
-     * employee wage.
-     * @param CompanyEmployeeWage 
-	 * @param companyEmployeeWage
-     * 
-	 * @return total wage
+     * employee wage. 
+     * @param companyEmployeeWage
+     * @return total wage
      *
      */
 
@@ -119,10 +128,10 @@
  
  /**
      *
-     * This is the main method Displaying Welcome to Employee Wage Computation
-     * passing company name wage rate per hour into calculate total wage method
-     * for employee wage
-	 * google and microsoft are the object that is created for EmployeeWageComputation.
+     *  This is the main method Displaying Welcome to Employee Wage Computation
+     *  passing company name wage rate per hour into calculate total wage method
+     *  for employee wage
+     *  google and microsoft are the object that is created for EmployeeWageComputation.
      *
      */
 
@@ -135,4 +144,5 @@
         employeeWageComputation.addCompany("Apple", 9, 10, 70);
         employeeWageComputation.calculateCompanyWage();
     }
+
 }
