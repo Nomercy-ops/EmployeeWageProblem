@@ -8,10 +8,10 @@
  * companies.
  *
  */
-
 package com.bridgelabz.Employeewage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * EmployeeWageComputation class starts here
@@ -22,22 +22,23 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
     public static final int PART_TIME = 1;
     public static final int FULL_TIME = 2;
 
-    // variables
+    //for storing employee data..  
     ArrayList<CompanyEmployeeWage> companies;
-    
-/**
- * constructor for adding companies from main method to companies arraylist
- * putting  companies into arraylist.
- */
+    HashMap<String, Integer> totalEmployeeWages;
 
+    /**
+     * constructor for adding companies from main method to companies arraylist
+     * putting companies into arraylist.
+     */
     public EmployeeWageComputation() {
         companies = new ArrayList<>();
-
+        totalEmployeeWages = new HashMap<>();
     }
 
     /**
-     * Method for adding new company and values into arraylist. It is getting value
-     * from the main method.
+     * Method for adding new company and values into arraylist. It is getting
+     * value from the main method. Here hashmap is also used to store each
+     * company name
      *
      * @param companyName
      * @param wageRatePerHour
@@ -48,6 +49,7 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
     public void addCompany(String companyName, int wageRatePerHour, int numberOfWorkingDays, int maxHoursPerMonth) {
         CompanyEmployeeWage company = new CompanyEmployeeWage(companyName, wageRatePerHour, numberOfWorkingDays, maxHoursPerMonth);
         companies.add(company);
+        totalEmployeeWages.put(companyName, 0);
     }
 
     /**
@@ -61,7 +63,7 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
 
     /**
      * Method for generating Employee type either full time employee or
-     * parttime.
+     * part time.
      *
      * @param employeeType
      * @return either 8 or 4 or 0 .
@@ -84,8 +86,8 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
     @Override
     public void calculateCompanyWage() {
         for (CompanyEmployeeWage company : companies) {
-            int totalEmployeeWage = calculateTotalWage(company);
-            company.setTotalEmployeeWage(totalEmployeeWage);
+            int totalWage = calculateTotalWage(company);
+            company.setTotalEmployeeWage(totalWage);
             System.out.println(company);
         }
     }
@@ -113,8 +115,19 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
             totalWage += wage;
             System.out.println("Day#: " + day + " Working Hours: " + workingHours);
         }
+        totalEmployeeWages.put(companyEmployeeWage.companyName, totalWage);   // putting data into hash map
         return totalWage;
 
+    }
+
+    /**
+     * Method for printing Total Employee wage by retreiving from hashmap.
+     */
+    public void printTotalEmployeeWages() {
+        System.out.println("The Companies and their total Employee Wages are:");
+        for (String companyName : totalEmployeeWages.keySet()) {
+            System.out.println(companyName + ": " + totalEmployeeWages.get(companyName));
+        }
     }
 
     /**
@@ -129,9 +142,10 @@ public class EmployeeWageComputation implements IEmployeeWageComputation {
         EmployeeWageComputation employeeWageComputation = new EmployeeWageComputation();
         employeeWageComputation.addCompany("Microsoft", 4, 30, 100);
         employeeWageComputation.addCompany("Google", 5, 40, 170);
-        employeeWageComputation.addCompany("Apple", 9, 10, 70);
         employeeWageComputation.addCompany("Amazon", 19, 10, 150);
         employeeWageComputation.calculateCompanyWage();
+        employeeWageComputation.printTotalEmployeeWages();
+
     }
 
-}
+} // end of class

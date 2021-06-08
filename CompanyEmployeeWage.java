@@ -8,14 +8,7 @@ class CompanyEmployeeWage {
     public final int wageRatePerHour;
     public final int numberOfWorkingDays;
     public final int maxHoursPerMonth;
-    public int totalEmployeeWage;
-
-    /**
-     * Method for setting employee total wage.
-     */
-    public void setTotalEmployeeWage(int totalEmployeeWage) {
-        this.totalEmployeeWage = totalEmployeeWage;
-    }
+    public int totalEmployeeWage = 0; ;
 
     /**
      *
@@ -32,12 +25,21 @@ class CompanyEmployeeWage {
         this.companyName = companyName;
         this.wageRatePerHour = wageRatePerHour;
         this.numberOfWorkingDays = numberOfWorkingDays;
-        this.maxHoursPerMonth = maxHoursPerMonth;
+        this.maxHoursPerMonth = maxHoursPerMonth;     
     }
-
+    
+     /**
+     * Method for setting employee total wage.
+     */
+    
+    public void setTotalEmployeeWage(int totalEmployeeWage) {
+        this.totalEmployeeWage = totalEmployeeWage;
+    }
+    
     /**
      * This method returns the string itself
      */
+    
     @Override
     public String toString() {
         return "Total wage of a month for " + companyName + " Employee is : " + totalEmployeeWage;
