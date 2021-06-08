@@ -8,45 +8,44 @@
  *
  */
  
+ //package com.bridgelabz.Employeewage;
  
-package com.bridgelabz.Employeewage;
-
-public class EmployeeWageComputation
-{
-    // class constants
-    private static final int PART_TIME = 1;
-    private static final int FULL_TIME = 2;
-   
-  
-    private final String companyName;
-    private final int wageRatePerHour;
-    private  final int numberOfWorkingDays;
-    private final int maxHoursPerMonth;
-    private int totalEmployeeWage;
+ public class EmployeeWageComputation
+ {
+ 
+ // class constants
+    public static final int PART_TIME = 1;
+    public static final int FULL_TIME = 2;
 	
-	/**
-     * 
-     *  EmployeeWageComputation is the constructor created with arguments  for initialization of values.
-     * @param companyName
-     * @param wageRatePerHour
-     * @param numberOfWorkingDays
-     * @param maxHoursPerMonth
-     *
-     */
-
-    EmployeeWageComputation(String companyName, int wageRatePerHour, int numberOfWorkingDays, int maxHoursPerMonth)
+	// variables
+	public int noOfCompanies;
+    public int	index=0;
+    CompanyEmployeeWage[] companies;
+	
+	// constructor for getting number of companies from main method
+    public EmployeeWageComputation(int noOfCompanies)
     {
-        this.companyName = companyName;
-        this.wageRatePerHour= wageRatePerHour;
-        this.numberOfWorkingDays = numberOfWorkingDays;
-        this.maxHoursPerMonth = maxHoursPerMonth;    
+        this.noOfCompanies = noOfCompanies;
+        companies = new CompanyEmployeeWage[noOfCompanies];
+        
     }
 	
+/**
+  * Method  for adding new company and values  into array.
+  *  It is getting value from the main method.
+  */
+
+    public void addCompany(String companyName, int wageRatePerHour, int numberOfWorkingDays, int maxHoursPerMonth)
+    {
+        companies[index++] = new CompanyEmployeeWage(companyName, wageRatePerHour, numberOfWorkingDays, maxHoursPerMonth);
+    }
+	
+
 /**
   * Method  for generating random number either 0 or 1 or 2.
   */
 
-   private int generateEmployeeType()
+   public int generateEmployeeType()
     {
         return (int) (Math.random() * 100) % 3;
     }
@@ -58,7 +57,7 @@ public class EmployeeWageComputation
    *  @return either 8 or 4 or 0 .
    */
 
-    private int getWorkingHours(int employeeType)
+    public int getWorkingHours(int employeeType)
     {
         switch (employeeType)
         {
@@ -70,49 +69,53 @@ public class EmployeeWageComputation
                 return 0;
         }
     }
+	
+	
+/**
+  * Method setting total Employee Wage of a company.
+  * Here calculation for each companies will be done by passing its value to  calculateTotalWage.
+  */
 
-
+	public void calculateCompanyWage()
+    {
+        for (CompanyEmployeeWage company : companies)
+        {
+            int totalEmployeeWage = calculateTotalWage(company);
+            company.setTotalEmployeeWage(totalEmployeeWage);
+            System.out.println(company);
+        }
+    }
+   
  /**
-     * calculateTotalWage method gets value from main method and calculate the
-     * employee wage
-     *
-     * @param company
-     * @param wageRatePerHour
-     * @param maxWorkingDays
-     * @param maxWorkingHours
+     * calculate TotalWage method gets value from main method and calculate the
+     * employee wage.
+     * @param CompanyEmployeeWage 
+	 * @param companyEmployeeWage
+     * 
+	 * @return total wage
      *
      */
 
-
-    private void calculateTotalWage()
+    public int calculateTotalWage(CompanyEmployeeWage companyEmployeeWage)
     {
 		// computation done here
 		
-        System.out.println("Computation of total wage of " + companyName + " employee");
+        System.out.println("Computation of total wage of " +companyEmployeeWage.companyName + " employee");
         int workingHours;
-        for (int day = 1, totalWorkingHours = 0; day <= numberOfWorkingDays
-                && totalWorkingHours <= maxHoursPerMonth; day++, totalWorkingHours += workingHours)
+		int totalWage = 0;
+		
+        for (int day = 1, totalWorkingHours = 0; day <= companyEmployeeWage.numberOfWorkingDays
+                && totalWorkingHours <= companyEmployeeWage.maxHoursPerMonth; day++, totalWorkingHours += workingHours)
         {
             int employeeType = generateEmployeeType();
             workingHours = getWorkingHours(employeeType);
-            int wage = workingHours * wageRatePerHour;
-            totalEmployeeWage += wage;
+            int wage = workingHours * companyEmployeeWage.wageRatePerHour;
+            totalWage += wage;
 			System.out.println("Day#: " + day +  " Working Hours: " + workingHours);
         }
+		 return totalWage;
 
     }
-	
-	
-	
-	/** 
-	 *     This method returns the string itself 
-	 */
-	
-    public String toString()
-    {
-        return "Total wage of a month for " + companyName + " Employee is : " +totalEmployeeWage;
-    }
-
  
  /**
      *
@@ -126,14 +129,10 @@ public class EmployeeWageComputation
 
     public static void main(String args[])
     {
-		
-        EmployeeWageComputation google = new EmployeeWageComputation("Google", 16, 20, 100);
-        EmployeeWageComputation microsoft = new EmployeeWageComputation("Microsoft", 12, 20, 150);
-
-        google.calculateTotalWage();
-        System.out.println(google);
-
-        microsoft.calculateTotalWage();
-        System.out.println(microsoft);
+        EmployeeWageComputation employeeWageComputation = new EmployeeWageComputation(3);
+        employeeWageComputation.addCompany("Microsoft", 4, 30, 100);
+        employeeWageComputation.addCompany("Google", 5, 40, 170);
+        employeeWageComputation.addCompany("Apple", 9, 10, 70);
+        employeeWageComputation.calculateCompanyWage();
     }
 }
